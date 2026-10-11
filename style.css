@@ -3,23 +3,23 @@ body {
   margin: 20px;
 }
 
-#status {
-  margin: 10px 0;
+button {
+  margin-left: 10px;
 }
 
-#status.success {
+#status {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.success {
   color: green;
 }
 
-#status.error {
+.error {
   color: red;
 }
 
-form {
-  margin: 20px 0;
-}
-
-ul {
-  list-style: none;
-  padding: 0;
+.info {
+  color: blue;
 }
