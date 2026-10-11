@@ -12,12 +12,15 @@ Open index.html in your browser (use Live Server or double-click).
 
 Use the buttons and form to load, create, and delete notes.
 
-📖 Documents
-[Looks like the result wasn't safe to show. Let's switch things up and try something else!]
+# 📖 Documents
+- [API Design](docs/api-design.md)
+- [Data Model](docs/data-model.md)
+- [Architecture](docs/architecture.md)
 
-[Looks like the result wasn't safe to show. Let's switch things up and try something else!]
-
-[Looks like the result wasn't safe to show. Let's switch things up and try something else!]
+### Document Screenshots
+![Docs Screenshot](screenshots/docs.png)  
+![Docs Screenshot 2](screenshots/docs-2.png)  
+![Docs Deleted Screenshot](screenshots/docs-deleted.png)
 
 📸 Screenshots
 API Design
@@ -38,8 +41,8 @@ Open index.html in your browser (use Live Server or double-click).
 Use the buttons and form to load, create, and delete notes.
 
 🌱 What I Learned
-How to build a reusable API client with fetch, async/await, and error handling.
+> How to build a reusable API client with fetch, async/await, and error handling.
 
-Why validation and UI states (loading, success, error, empty) matter for user experience.
+> Why validation and UI states (loading, success, error, empty) matter for user experience.
 
-How to design REST endpoints, relational data models, and scalable architectures.
+> How to design REST endpoints, relational data models, and scalable architectures.
