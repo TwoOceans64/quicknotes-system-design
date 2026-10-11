@@ -33,6 +33,10 @@ Architecture
 ![Architecture Screenshot](screenshots/architecture.png)  
 ![Architecture Screenshot 2](screenshots/architecture-2.png)
 
+Open index.html in your browser (use Live Server or double-click).
+
+Use the buttons and form to load, create, and delete notes.
+
 🌱 What I Learned
 How to build a reusable API client with fetch, async/await, and error handling.
 
