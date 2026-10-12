@@ -3,9 +3,7 @@ const API_URL = "https://jsonplaceholder.typicode.com/posts";
 // Reusable request helper
 async function request(url, options = {}) {
   const response = await fetch(url, options);
-  if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
-  }
+  if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
   return response;
 }
 
@@ -13,10 +11,8 @@ async function request(url, options = {}) {
 function setStatus(message, type) {
   const statusEl = document.getElementById("status");
   statusEl.textContent = message;
-  statusEl.className = ""; // clear old classes
-  if (type === "success") statusEl.classList.add("success");
-  if (type === "error") statusEl.classList.add("error");
-  if (type === "info") statusEl.classList.add("info");
+  statusEl.className = "";
+  if (type) statusEl.classList.add(type);
 }
 
 // Render a note with Delete button
@@ -32,9 +28,7 @@ function renderNote(note) {
       const response = await request(`${API_URL}/${note.id}`, { method: "DELETE" });
       if (response.ok) {
         li.remove();
-        setStatus(`Note deleted successfully (id ${note.id})`, "success");
-      } else {
-        throw new Error(`Failed to delete note ${note.id}`);
+        setStatus(`Note deleted (id ${note.id})`, "success");
       }
     } catch (err) {
       setStatus(err.message, "error");
@@ -51,11 +45,16 @@ document.getElementById("load-btn").addEventListener("click", async () => {
   btn.disabled = true;
   setStatus("Loading notes...", "info");
   try {
-    const response = await request(API_URL);
+    const response = await request(`${API_URL}?_limit=10`);
     const notes = await response.json();
-    document.getElementById("notes-list").innerHTML = "";
-    notes.slice(0, 5).forEach(renderNote); // show first 5
-    setStatus("Notes loaded successfully", "success");
+    const list = document.getElementById("notes-list");
+    list.innerHTML = "";
+    if (notes.length === 0) {
+      setStatus("No notes found.", "info");
+    } else {
+      notes.forEach(renderNote);
+      setStatus(`Loaded ${notes.length} notes from the server.`, "success");
+    }
   } catch (err) {
     setStatus(err.message, "error");
   } finally {
@@ -70,8 +69,9 @@ document.getElementById("note-form").addEventListener("submit", async (e) => {
   btn.disabled = true;
   setStatus("Creating note...", "info");
   try {
-    const title = document.getElementById("title").value;
-    const body = document.getElementById("body").value;
+    const title = document.getElementById("title-input").value.trim();
+    if (!title) throw new Error("Title is required (max 100 chars).");
+    const body = document.getElementById("body-input").value;
     const response = await request(API_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -80,7 +80,7 @@ document.getElementById("note-form").addEventListener("submit", async (e) => {
     const note = await response.json();
     renderNote(note);
     document.getElementById("note-form").reset();
-    setStatus("Note created successfully", "success");
+    setStatus(`Note created (status ${response.status}, id ${note.id})`, "success");
   } catch (err) {
     setStatus(err.message, "error");
   } finally {

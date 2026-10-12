@@ -8,9 +8,10 @@ This project proves the front end can talk to an API (via JSONPlaceholder) and p
 1. Clone the repo:
    ```bash
    git clone https://github.com/your-username/quicknotes-system-design
-Open index.html in your browser (use Live Server or double-click).
 
-Use the buttons and form to load, create, and delete notes.
+2. Open index.html in your browser (use Live Server or double-click).
+
+3. Use the buttons and form to load, create, and delete notes.
 
 # 📖 Documents
 - [API Design](docs/api-design.md)
